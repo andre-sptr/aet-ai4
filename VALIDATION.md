@@ -39,4 +39,8 @@ Hasil dan screenshot browser lokal berada di `.local/browser/` dan sengaja tidak
 
 ## Menjalankan dan menerapkan
 
+### Pembaruan kompatibilitas pemanggilan perintah Windows
+
+Skrip lingkungan dan development kini menjalankan entry point JavaScript npm/TSX/Prisma melalui executable Node, memakai argv terpisah dan `shell:false`. Tujuh tes regresi baru mencakup resolusi jalur Windows, fallback lokasi npm, export paket, jalur dengan spasi/argumen literal, peluncuran TSX, dan penanganan kegagalan child process. Sesudah perubahan, **80/80 tes lulus** dengan database disposable, lint tanpa warning, typecheck, `db:generate`, dan build API lulus. Pemeriksaan ini dijalankan di Linux dengan fixture jalur Windows; eksekusi Windows native dan perilaku Ctrl+C Windows belum diverifikasi di mesin ini.
+
 Ikuti [README.md](README.md) untuk instalasi, lima pengaturan inti, migrasi, import, pembuatan administrator, dan `npm run dev`. Untuk tes browser, sajikan `apps/web/out/` pada port frontend lokal dan jalankan API terpisah; browser-admin hanya menerima database lokal disposable. Lihat [DEPLOYMENT.md](DEPLOYMENT.md) untuk hosting statis, API terpisah, cookie/CORS, header, integrasi opsional, dan rebuild. Kontrak endpoint dijelaskan di [API.md](API.md).

@@ -16,7 +16,7 @@
     "dev:api": "node scripts/with-env.mjs npm run dev --workspace=@aet/api",
     "typecheck": "npm run build --workspace=@aet/contracts && npm run typecheck --workspace=@aet/api && npm run typecheck --workspace=@aet/web && tsc --noEmit -p tsconfig.json",
     "lint": "eslint . --max-warnings=0",
-    "test": "npm run build --workspace=@aet/contracts && tsx --tsconfig tsconfig.test.json --experimental-test-module-mocks --test apps/api/test/*.test.ts apps/web/tests/*.test.ts apps/web/tests/*.test.tsx scripts/*.test.ts",
+    "test": "npm run build --workspace=@aet/contracts && tsx --tsconfig tsconfig.test.json --experimental-test-module-mocks --test apps/api/test/*.test.ts apps/web/tests/*.test.ts apps/web/tests/*.test.tsx scripts/*.test.ts scripts/*.test.mjs",
     "build:web": "npm run build --workspace=@aet/contracts && npm run sync:routes && node scripts/with-env.mjs npm run build --workspace=@aet/web && npm run verify:export",
     "build:api": "npm run build --workspace=@aet/contracts && npm run build --workspace=@aet/api",
     "build": "npm run build:api && npm run build:web",

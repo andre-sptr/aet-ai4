@@ -69,6 +69,10 @@ npm run verify:export
 
 Automated provider tests use mocks. Use an isolated/disposable PostgreSQL database for integration tests, never production content. The export verifier checks required routes and local assets, the canonical document, frontend/backend separation, and configured secret values. These commands describe the supported workflow; the completion report records which checks were actually executed and their results.
 
-The executed results are recorded in [VALIDATION.md](VALIDATION.md): 73 tests passed with a disposable PostgreSQL database, plus 14 public/chat and 8 admin browser checks. Browser entry points are `npm run test:browser` and `npm run test:browser:admin`; serve the static export and API first. Admin browser checks additionally require `AET_TEST_DATABASE_URL` for a local database ending in `_test` and `AET_TEST_DISPOSABLE_DB=true`; they use temporary identities and provider/storage fixtures and clean up their own records.
+The executed results are recorded in [VALIDATION.md](VALIDATION.md): 80 tests passed with a disposable PostgreSQL database, plus 14 public/chat and 8 admin browser checks. Browser entry points are `npm run test:browser` and `npm run test:browser:admin`; serve the static export and API first. Admin browser checks additionally require `AET_TEST_DATABASE_URL` for a local database ending in `_test` and `AET_TEST_DISPOSABLE_DB=true`; they use temporary identities and provider/storage fixtures and clean up their own records.
+
+### Windows command startup
+
+The project wrappers invoke the npm, TSX, and Prisma JavaScript entry points through the current Node executable. They do not depend on launching Windows `.cmd` shims directly or enabling a shell. If an older checkout reports `spawn npm/tsx/prisma ENOENT`, pull the fix, run `npm ci`, then rerun `npm run db:generate` before the API build. Missing `PrismaClient` exports after failed generation are a consequence of the ungenerated client. Run setup commands in order and stop if one fails. For an existing local Docker container use `docker start aet-postgres`; `docker run --name aet-postgres ...` creates it only once.
 
 Deploy **only `apps/web/out/`** to a static host and run the compiled API as a separate service connected to PostgreSQL. See [DEPLOYMENT.md](DEPLOYMENT.md) and [API.md](API.md) for the deployment and HTTP contracts.
