@@ -1,0 +1,1 @@
+{"extends":"./apps/web/tsconfig.json","compilerOptions":{"jsx":"react-jsx"},"include":["apps/api/**/*.ts","apps/web/**/*.ts","apps/web/**/*.tsx","packages/**/*.ts","scripts/*.ts"],"exclude":["node_modules","apps/web/.next","apps/web/out"]}

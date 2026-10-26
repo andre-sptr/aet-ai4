@@ -1,0 +1,42 @@
+{
+  "news": [
+    {
+      "id": "cmje97yyr0000ynexrmp1i8ug",
+      "title": "Memperkenalkan AET AI: Era Baru Informasi & Inovasi Mahasiswa",
+      "slug": "memperkenalkan-aet-ai-era-baru-informasi--inovasi-mahasiswa",
+      "content": "**Selamat datang di masa depan.**\n\nHari ini menjadi momentum bersejarah bagi **Himpunan Mahasiswa AET PCR**. Di tengah pesatnya perkembangan teknologi, kami menjawab tantangan zaman dengan meluncurkan **AET AI**—sebuah ekosistem digital cerdas yang dirancang untuk merevolusi cara kita berinteraksi, mencari informasi, dan berorganisasi.\n\n### 🌐 Apa itu AET AI?\n\nAET AI bukan sekadar website informasi biasa. Ini adalah *\"Rumah Digital\"* yang hidup, menggabungkan kecanggihan **Artificial Intelligence (AI)** dengan kebutuhan nyata mahasiswa. Platform ini lahir dari visi kami untuk menciptakan lingkungan akademik yang responsif, transparan, dan terintegrasi.\n\nKami ingin memberikan solusi praktis atas kebutuhan akses informasi yang cepat, akurat, dan dapat diakses kapan saja.\n\n### 🚀 Fitur Unggulan\n\nJelajahi fitur-fitur yang kami rancang khusus untuk menunjang produktivitas Anda:\n\n1. **🤖 Asisten Cerdas (AI Chat)**\n\n   Punya pertanyaan seputar akademik atau program kerja himpunan? Tidak perlu bingung mencari admin. **AET AI Chat** siap menjawab pertanyaan Anda secara instan, layaknya berdiskusi dengan teman yang serba tahu.\n\n2. **📰 Pusat Berita Terkini**\n\n   Ucapkan selamat tinggal pada informasi yang terlewat. Semua artikel, pengumuman akademik, hingga liputan kegiatan himpunan kini terpusat di satu tempat yang mudah diakses.\n\n3. **📅 Agenda Kegiatan (Events)**\n\n   Pastikan Anda selalu *update*. Fitur ini memuat jadwal lengkap kegiatan himpunan, workshop, seminar, hingga gathering angkatan agar Anda tidak melewatkan momen penting.\n\n4. **👥 Struktur Organisasi (Team)**\n\n   Kenali wajah-wajah di balik layar. Fitur ini menampilkan profil lengkap pengurus himpunan yang berdedikasi untuk melayani dan memajukan mahasiswa AET PCR.\n\n### ✨ Harapan Kami\n\nPeluncuran AET AI adalah bukti nyata bahwa mahasiswa AET PCR mampu beradaptasi dan memimpin di era transformasi digital. Kami berharap platform ini tidak hanya menjadi sumber informasi, tetapi juga **ruang inspirasi** bagi seluruh mahasiswa untuk terus berkarya dan berinovasi.\n\nMari jelajahi AET AI dan jadilah bagian dari perubahan ini!\n\n---\n*Salam Inovasi,*\n\n**Pengembang AET AI**",
+      "summary": "Sebuah langkah inovatif dari Himpunan Mahasiswa AET PCR. Kami dengan bangga meluncurkan AET AI, platform asisten cerdas dan pusat informasi terpadu untuk memudahkan akses informasi akademik dan kegiatan.",
+      "imageUrl": "https://fv6vukrjpkyzazca.public.blob.vercel-storage.com/Screenshot%202025-12-20%20184656.png",
+      "published": true,
+      "createdAt": "2025-12-20T12:08:09.409Z",
+      "updatedAt": "2025-12-20T12:24:51.843Z"
+    }
+  ],
+  "events": [
+    {
+      "id": "cmjea59ug0001ynexgjo0l5fi",
+      "title": "FESTRON",
+      "description": "# 🔥 OPEN REGISTRATION FESTRON 2026! 🔥\n\nHalo Siswa/i SMA/SMK Sederajat dan Mahasiswa! 👋\n\nSiap untuk menantang diri dan menambah wawasan di dunia teknologi? **Politeknik Caltex Riau** kembali menghadirkan event tahunan yang paling ditunggu-tunggu: **FESTRON (Festival Electronics and Telecommunication)!**\n\nJangan lewatkan kesempatan emas ini, buktikan kemampuanmu dan raih prestasi gemilang!\n\n> 🏆 **TOTAL HADIAH HINGGA 10 JUTA RUPIAH!**\n> 🎟️ **PENDAFTARAN GRATIS (FREE REGISTRATION)**\n\n### 🗓 Catat Tanggal Pentingnya!\n\nPastikan kamu tidak ketinggalan jadwal berikut:\n\n* **Waktu Acara:** 20 - 21 Januari 2026\n* **Lokasi:** Politeknik Caltex Riau\n* **Periode Pendaftaran:** 18 Desember - 18 Januari\n\n### 🚀 Daftar Kompetisi & Kegiatan\n\nKami menghadirkan berbagai kompetisi seru yang bisa kamu ikuti:\n\n* ✅ Festival\n* ✅ Seminar & Workshop\n* ✅ Line Tracking (Robotika)\n* ✅ Olimpiade\n* ✅ Rangking 1\n* ✅ Poster Competition\n\n### 📞 Cara Mendaftar\n\nTunggu apa lagi? Yuk, segera daftarkan diri atau tim kamu sekarang juga! Scan QR Code yang tertera di poster atau hubungi narahubung di bawah ini untuk informasi lebih lanjut:\n\n* **Rayhan:** 0821-7067-7520\n* **Dani:** 0823-8178-1743\n\n---\n\n**Ikuti kami untuk update terbaru:**\n📷 Instagram: [@aetpcr](https://instagram.com/aetpcr)\n🎵 TikTok: [aet.pcr](https://tiktok.com/@aet.pcr)\n\n#FESTRON2026 #PoliteknikCaltexRiau #PCR #EventPekanbaru #Teknologi",
+      "location": "Politeknik Caltex Riau",
+      "startDate": "2026-01-20T01:00:00.000Z",
+      "endDate": "2026-01-21T09:00:00.000Z",
+      "imageUrl": "https://fv6vukrjpkyzazca.public.blob.vercel-storage.com/Poster%20Festron.jpeg",
+      "createdAt": "2025-12-20T12:34:03.158Z",
+      "updatedAt": "2025-12-20T12:51:04.462Z",
+      "published": true
+    }
+  ],
+  "team": [
+    {
+      "id": "cmje6cut200049dwnmagtvuf1",
+      "name": "Cyntia Widiasari, S.ST, M.T.",
+      "position": "Pembina/Kepala Prodi",
+      "bio": "Bismillah",
+      "photoUrl": "https://fv6vukrjpkyzazca.public.blob.vercel-storage.com/Buk%20Cyn.webp",
+      "order": 0,
+      "socials": null,
+      "createdAt": "2025-12-20T10:47:58.454Z",
+      "updatedAt": "2025-12-20T11:45:27.665Z"
+    }
+  ]
+}

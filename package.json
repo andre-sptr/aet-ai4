@@ -1,0 +1,50 @@
+{
+  "name": "aet-ai-rebuilt",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "dev:web": "node scripts/with-env.mjs npm run dev --workspace=@aet/web",
+    "dev:api": "node scripts/with-env.mjs npm run dev --workspace=@aet/api",
+    "typecheck": "npm run build --workspace=@aet/contracts && npm run typecheck --workspace=@aet/api && npm run typecheck --workspace=@aet/web && tsc --noEmit -p tsconfig.json",
+    "lint": "eslint . --max-warnings=0",
+    "test": "npm run build --workspace=@aet/contracts && tsx --tsconfig tsconfig.test.json --experimental-test-module-mocks --test apps/api/test/*.test.ts apps/web/tests/*.test.ts apps/web/tests/*.test.tsx scripts/*.test.ts",
+    "build:web": "npm run build --workspace=@aet/contracts && npm run sync:routes && node scripts/with-env.mjs npm run build --workspace=@aet/web && npm run verify:export",
+    "build:api": "npm run build --workspace=@aet/contracts && npm run build --workspace=@aet/api",
+    "build": "npm run build:api && npm run build:web",
+    "sync:routes": "node scripts/with-env.mjs tsx scripts/sync-routes.ts",
+    "verify:export": "node scripts/with-env.mjs tsx scripts/verify-export.ts",
+    "seed": "node scripts/with-env.mjs tsx scripts/import-legacy.ts",
+    "import:legacy-content": "npm run seed",
+    "admin:create": "node scripts/with-env.mjs tsx apps/api/src/create-admin.ts",
+    "db:generate": "node scripts/with-env.mjs prisma generate --schema apps/api/prisma/schema.prisma",
+    "db:migrate": "node scripts/with-env.mjs tsx scripts/migrate.ts",
+    "test:browser": "node scripts/browser-smoke.mjs",
+    "test:browser:admin": "node scripts/with-env.mjs tsx scripts/browser-admin.ts"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/react": "^16.3.0",
+    "@types/jsdom": "^21.1.7",
+    "@types/node": "^24.10.0",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "dotenv": "^17.2.3",
+    "eslint": "^9.39.1",
+    "eslint-config-next": "16.4.2",
+    "jsdom": "^26.1.0",
+    "playwright-core": "^1.56.1",
+    "tsx": "^4.21.0",
+    "typescript": "5.9.3",
+    "typescript-eslint": "^8.48.0"
+  }
+}
