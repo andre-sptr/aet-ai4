@@ -8,7 +8,8 @@ for (const name of ["window", "document", "navigator", "HTMLElement", "Element",
 const { createElement } = await import("react");
 mock.module("next/image", { defaultExport: function MockImage({ unoptimized: _unoptimized, ...props }: Record<string, unknown>) { return createElement("img", props); } });
 mock.module("next/link", { defaultExport: function MockLink(props: Record<string, unknown>) { return createElement("a", props); } });
-const { render, fireEvent, waitFor, cleanup } = await import("@testing-library/react");
+const { render, fireEvent, waitFor, cleanup, within } =
+  await import("@testing-library/react");
 const { default: ChatWorkspace } = await import("../components/chat/ChatWorkspace");
 const originalFetch = globalThis.fetch;
 afterEach(() => { cleanup(); globalThis.fetch = originalFetch; dom.window.localStorage.clear(); });
@@ -106,4 +107,38 @@ test("editing an earlier user message regenerates from that point and drops late
   assert.ok(await view.findByText("Jawaban 2"));
   assert.equal(view.queryByText("Jawaban 1"), null);
   assert.deepEqual(requests[1].messages, [{ role: "user", content: "Kode diperbaiki" }]);
+});
+
+test("completed assistant messages expose copy feedback controls with accessible selected states", async () => {
+  let copiedText = "";
+  Object.defineProperty(dom.window.navigator, "clipboard", { configurable: true, value: { writeText: async (value: string) => { copiedText = value; } } });
+  globalThis.fetch = async () => new Response(new ReadableStream({ start(controller) {
+    controller.enqueue(frame("delta", { text: "Jawaban yang dapat dinilai" }));
+    controller.enqueue(frame("done", { status: "complete", requestId: "feedback" }));
+    controller.close();
+  } }), { headers: { "Content-Type": "text/event-stream" } });
+  const view = render(<ChatWorkspace initialPersona="daily" onBack={() => {}} />);
+  const input = view.getByRole("textbox", { name: "Pesan untuk Smart Companion" });
+  fireEvent.change(input, { target: { value: "Uji jawaban" } });
+  await waitFor(() => assert.equal(view.getByRole("button", { name: "Kirim pesan" }).hasAttribute("disabled"), false));
+  fireEvent.click(view.getByRole("button", { name: "Kirim pesan" }));
+  assert.ok(await view.findByText("Jawaban yang dapat dinilai"));
+  const assistantMessage = view.getByRole("article", {
+    name: "Jawaban AET AI"
+  });
+
+  fireEvent.click(
+    within(assistantMessage).getByRole("button", {
+      name: "Salin pesan"
+    })
+  );
+  await waitFor(() => assert.equal(copiedText, "Jawaban yang dapat dinilai"));
+  assert.ok(await view.findByText("Disalin"));
+  const helpful = view.getByRole("button", { name: "Jawaban membantu" });
+  fireEvent.click(helpful);
+  assert.equal(helpful.getAttribute("aria-pressed"), "true");
+  assert.ok(view.getByText("Pilihan lokal · belum dikirim"));
+  fireEvent.click(view.getByRole("button", { name: "Jawaban kurang membantu" }));
+  assert.equal(helpful.getAttribute("aria-pressed"), "false");
+  assert.equal(view.getByRole("button", { name: "Jawaban kurang membantu" }).getAttribute("aria-pressed"), "true");
 });
