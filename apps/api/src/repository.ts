@@ -27,12 +27,25 @@ function serialize(record: unknown): ContentRecord {
 
 export async function createPrismaRepository(databaseUrl: string): Promise<Repository> {
   const { createPrismaClient } = await import('./db.js');
-  const { Prisma } = await import('@prisma/client');
+  const { Prisma: PrismaRuntime } = await import('@prisma/client');
   const db = createPrismaClient(databaseUrl);
-  const teamData = (input: ContentInput) => ({
-    ...input,
-    ...('socials' in input && input.socials === null ? { socials: Prisma.DbNull } : {}),
-  });
+  // Prisma's model delegate methods are generic. Avoid Parameters<typeof delegate.method>[0],
+  // which collapses the argument type to unknown under strict TypeScript.
+  // Keep nullable JSON semantics: an explicit null means SQL NULL, not JSON null.
+  const dbNull = (PrismaRuntime as unknown as {
+    DbNull?: unknown;
+  }).DbNull;
+
+  const teamData = (input: ContentInput): Record<string, unknown> => {
+    const data: Record<string, unknown> = { ...input };
+    if ('socials' in input && input.socials === null) {
+      if (dbNull === undefined) {
+        throw new Error('Prisma Client belum sinkron dengan schema. Jalankan npm run db:generate.');
+      }
+      data.socials = dbNull;
+    }
+    return data;
+  };
   return {
     async ping() { await db.$queryRaw`SELECT 1`; },
     findAdmin: username => db.admin.findUnique({ where: { username } }),
@@ -59,14 +72,14 @@ export async function createPrismaRepository(databaseUrl: string): Promise<Repos
       return record ? serialize(record) : null;
     },
     async create(resource, input) {
-      if (resource === 'news') return serialize(await db.news.create({ data: input as unknown as Parameters<typeof db.news.create>[0]['data'] }));
-      if (resource === 'events') return serialize(await db.event.create({ data: input as unknown as Parameters<typeof db.event.create>[0]['data'] }));
-      return serialize(await db.teamMember.create({ data: teamData(input) as unknown as Parameters<typeof db.teamMember.create>[0]['data'] }));
+      if (resource === 'news') return serialize(await db.news.create({ data: input as never }));
+      if (resource === 'events') return serialize(await db.event.create({ data: input as never }));
+      return serialize(await db.teamMember.create({ data: teamData(input) as never }));
     },
     async update(resource, id, input) {
-      if (resource === 'news') return serialize(await db.news.update({ where: { id }, data: input as Parameters<typeof db.news.update>[0]['data'] }));
-      if (resource === 'events') return serialize(await db.event.update({ where: { id }, data: input as Parameters<typeof db.event.update>[0]['data'] }));
-      return serialize(await db.teamMember.update({ where: { id }, data: teamData(input) as unknown as Parameters<typeof db.teamMember.update>[0]['data'] }));
+      if (resource === 'news') return serialize(await db.news.update({ where: { id }, data: input as never }));
+      if (resource === 'events') return serialize(await db.event.update({ where: { id }, data: input as never }));
+      return serialize(await db.teamMember.update({ where: { id }, data: teamData(input) as never }));
     },
     async delete(resource, id) {
       if (resource === 'news') await db.news.delete({ where: { id } });
